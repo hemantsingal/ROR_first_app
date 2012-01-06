@@ -1,0 +1,65 @@
+<script>
+function doIframe(){
+	o = document.getElementsByTagName('iframe');
+	for(i=0;i<o.length;i++){
+		if (/\bautoHeight\b/.test(o[i].className)){
+			setHeight(o[i]);
+			addEvent(o[i],'load', doIframe);
+		}
+	}
+	document.getElementById("iframe_id").contentWindow.document.body.onclick = 
+	function(e) {
+		var obj = e.target;
+//		alert(obj.href);
+		if(obj.href != null) {
+			var m = $(obj);
+			if(m.attr('data-method') != null) {
+				window.location = '/test?src=/products';
+			}
+			else {
+				//alert(obj.href);
+				//alert(m.attr('data-method'));
+				//alert(obj.data-method);
+				var y = obj.href.split('/');
+	//			alert(y);
+				y.splice(0,3);
+	//			alert(y);
+				var z = y.join('/');
+				window.stop();
+				window.location = '/test?src=/'+z;
+			}
+  		
+		}
+	}
+}
+
+function setHeight(e){
+	if(e.contentDocument){
+		e.height = e.contentDocument.body.offsetHeight + 35;
+	} else {
+		e.height = e.contentWindow.document.body.scrollHeight;
+	}
+}
+
+function addEvent(obj, evType, fn){
+	if(obj.addEventListener)
+	{
+	obj.addEventListener(evType, fn,false);
+	return true;
+	} else if (obj.attachEvent){
+	var r = obj.attachEvent("on"+evType, fn);
+	return r;
+	} else {
+	return false;
+	}
+}
+
+if (document.getElementById && document.createTextNode){
+	addEvent(window,'load', doIframe);	
+}
+</script>
+<div id="Header" class="Txt">
+    Custom Header - Online Retailer
+</div>
+      
+<iframe class="autoHeight" id="iframe_id" frameborder="0" scrolling="no" width="100%" src="<%= @x %>"/>

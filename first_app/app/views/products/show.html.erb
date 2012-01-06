@@ -1,0 +1,57 @@
+<script>
+$(document).ready(function(){
+  
+  if(top != self) {
+    $("#Header").css('display','none');
+  }
+  
+});
+</script>
+<div id="Wraper" class="BoxBdr ShadowBox">
+      <div id="Header">
+          <span class="FloatLeft"><img src="/assets/logo.jpg" width="195" height="33" alt="" /></span>
+            <span class="Txt">- Online Retailer</span>
+      </div>
+        <div id="MainContent" class="ProductDetail">
+          <div class="CommonBlock">
+            <h2><%= @product.name %></h2>
+                <div class="CommonBlock MarginT15">
+                <div class="ImgHolder"><img src="<%= @product.image %>" width="150" height="auto" alt="" /></div>
+                  <div class="Detail">
+                  <p>
+                    <strong>Product Description </strong>-- <%= @product.description %> </p>
+                  </div>
+                  </div>
+                  <div class="CommonBlock MarginT10">
+                    <div class="Amt">Price: $<%= @product.price %> <br/>
+                    Availability: <% if @product.availability == 1 %>
+                                    <span class="instock">In Stock
+                                    <% else %> <span class="backord">Back Ordered
+                                <% end %></span></div>
+                    <div class="CommonBlock">
+                      <a href="<%= product_path %>/edit" class="BtnCommon BtnEdit">Edit</a>
+                      <%= link_to 'delete', @product, :method => :delete, :class => "BtnCommon BtnDelete" %>
+                    <!--    <a href="#" class="BtnCommon BtnDelete">Delete</a> -->
+                        <a href="<%= products_path %>" class="BtnCommon BtnSeeAllProducts">See All Products</a>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="Reviews PaddingB30">
+              <div class="Heading">Reviews <span>| <%= @reviews.length %> REVIEWS</span></div>
+                <ul>
+                <% @reviews.each do |review| %>
+                <li><p><strong><%= review.reviewer %>: </strong> <%= review.body %> </p>
+                <span><%= review.published %></span>
+                </li>
+                <% end %>
+                </ul>
+            </div>
+            
+            
+            
+            
+        </div>
+        <div class="Clear"></div>
+</div>

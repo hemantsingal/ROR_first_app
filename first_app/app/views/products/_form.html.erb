@@ -1,0 +1,35 @@
+<%= form_for(@product) do |f| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2>Following error(s) need to be resolved:</h2>
+
+      <ul>
+      
+
+      <% @product.errors.each do |attr, msg| %>
+        <% if @product.errors[attr].first == msg %>
+        <li><%= "#{attr} #{msg}" %> </li>
+        <% end%>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<!--[if !IE]>Main Container<![endif]-->
+                <ul>
+                <li><label>Name:</label><%= f.text_field :name, {:class => "TxtBox"} %></li>
+                <!--<input type="text" value="" class="TxtBox" />-->
+                <li><label>Description:</label><%= f.text_area :description, {:class => "TxtBox"} %>
+                <li><label>Image URL:</label><%= f.text_field :image, {:class => "TxtBox"} %></li>
+                <li><label>Price:</label><%= f.text_field :price, {:class => "TxtBox TxtBoxPrice"} %></li>
+               <li><label>Availability:</label>
+                  <%= f.radio_button:availability,'1',:checked => true%><span class="Darkgray Text12 PaddingL5 MarginT3">In Stock</span>
+                  <%= f.radio_button:availability,'0'%><span class="Darkgray Text12 PaddingL5 MarginT3">Back Ordered</span></li>
+               <li>
+               
+               <input type="submit" value="Save" name="commit" class="BtnCommon SeeAll MarginL80 MarginT25"> <input type="button" value="Cancel" onClick="parent.location='<%=@redirect%>'" class="BtnCommon SeeAll MarginT25"/>
+              
+               </li>
+                
+             </ul>
+<% end %>

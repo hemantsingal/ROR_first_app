@@ -1,0 +1,130 @@
+<script>
+var popupStatus = 0;
+function loadPopup(){
+    
+    //loads popup only if it is disabled
+    if(popupStatus==0){
+      //  alert("hi");
+//        $("#backgroundPopup").css({
+//            "opacity": "0.7"
+//        });
+//        $("#backgroundPopup").fadeIn("slow");
+        $("#popup_id").fadeIn("slow");
+        popupStatus = 1;
+    //    alert("hi1");
+    }
+}
+
+function centerPopup(e){
+    //request data for centering
+    var windowWidth = document.documentElement.clientWidth;
+    var windowHeight = document.documentElement.clientHeight;
+    var popupHeight = $("#popup_id").height();
+    var popupWidth = $("#popup_id").width();
+    //centering
+    $("#popup_id").css({
+        "position": "absolute",
+        "top": (windowHeight-popupHeight)/2,
+        "left": (windowWidth-popupWidth)/2
+    });
+    //only need force for IE6
+    
+//    $("#backgroundPopup").css({
+//        "height": windowHeight
+//    });
+    
+}
+
+function disablePopup(){
+    //disables popup only if it is enabled
+    if(popupStatus==1){
+//        $("#backgroundPopup").fadeOut("slow");
+        $("#popup_id").fadeOut("slow");
+        popupStatus = 0;
+    }
+}
+
+$(document).ready(function(){
+ //   alert("hi");
+   $('a.Del').click(function() {
+
+    var x = $(this);
+   x.parent().parent().remove();
+    var z = $(".TotalProducts").html()
+    var y = z.split(' ');
+
+    y[0] = y[0] -1;
+    $(".TotalProducts").html(y[0]+" "+y[1]);
+   
+    // we just need to add the key/value pair for the DELETE method
+    // as the second argument to the JQuery $.post() call
+    $.post(this.href, { _method: 'delete' });
+    return false;
+  }); 
+
+});
+</script>
+<!--[if !IE]>Main Container<![endif]-->
+<div id="Wraper" class="BoxBdr ShadowBox">
+    <div id="Header">
+        <span class="FloatLeft"><img src="/assets/logo.jpg" width="195" height="33" alt="" /></span>
+        <span class="Txt">- Online Retailer</span>
+    </div>
+    <div id="MainContent">
+    <div class="CommonBlock">
+        <h2>Top Products</h2>
+        <div class="BestSeller">
+            <div class="Title">
+                Best-Sellers
+            </div>
+        <ul>
+            <% @things.each do |thing| %>
+            <li><%= link_to image_tag(thing.image, :height=>136, :width=>115), thing %>    <%= link_to thing.name, thing %>
+            </li>
+        
+        <% end %>    
+        </ul>
+            </div>
+            </div>
+            
+            <div class="AllProduct">
+                <div class="FloatLeft">
+                    <h2>All Products</h2>
+                </div>
+                <div class="FloatRight MarginT25">
+                    <a href="<%= new_product_path %>" class="BtnCommon BtnAddNew">Add New</a>
+                </div>
+                <span class="TotalProducts"><%= @x %> Products</span>
+                <ul>
+                <% @products.each do |product| %>
+                <li>
+                  <div class="ImgHolder"><%= link_to image_tag(product.image, :height=>48, :width=>48), product %></div>
+                <div class="Detail">
+                            <%= link_to product.name, product %>
+                            <span class="Amt">$<%= product.price %></span>
+                            <p>
+                                <%= truncate(product.description, :length => 225, :separator => ' ') %> 
+                                <% if product.description.length > 225 %>
+                                    <%= link_to "more...", product %>
+                                <% end %>
+                            </p>
+                            <%= link_to '[delete]', product, :method => :delete, :class => "Del" %>
+                            <!-- <a href="#" class="Del">delete</a> -->
+                        </div>
+                </li>
+                <% end %>
+</ul>
+            <div class="CommonBlock">
+                <div id="paginator" class="Pagination Textcenter MarginT0">
+                    <%= will_paginate @products %>
+                </div>
+            </div>
+                            
+        </div>
+       
+</div>
+<div id="Footer" class="Textcenter">Copyright 2008-2012 Contoso.com - Online Retailer. All Rights Reserved.</div>
+
+<!--[if !IE]>Main Container end<![endif]-->
+</body>
+</html>
