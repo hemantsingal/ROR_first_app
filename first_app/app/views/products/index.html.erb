@@ -62,6 +62,9 @@ $(document).ready(function(){
     return false;
   }); 
 
+    if(top != self) {
+        $("#Header").css('display','none');
+    }
 });
 </script>
 <!--[if !IE]>Main Container<![endif]-->

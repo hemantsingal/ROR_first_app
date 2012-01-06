@@ -204,7 +204,7 @@ background: -o-linear-gradient(top, #fefefe 0%, #b8b8b8 100%);
 
 #MainContent .AllProduct ul{ list-style:none;}
 #MainContent .AllProduct ul li{float:left; width:98%; margin:0; padding:10px 1% 20px 1%; position:relative; }
-#MainContent .AllProduct ul li:hover{ background:#f3f3f3; cursor:pointer; border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px; -mso-border-radius:5px; behavior: url(css/PIE.htc); position:relative; }
+#MainContent .AllProduct ul li:hover{ background:#f3f3f3; border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px; -mso-border-radius:5px; behavior: url(css/PIE.htc); position:relative; }
 #MainContent .AllProduct ul li .ImgHolder{ float:left; width:65px;}
 #MainContent .AllProduct ul li .ImgHolder img{ border:#d0cece solid 1px; border-radius:3px; -moz-border-radius:3px; -webkit-border-radius:3px; -mso-border-radius:3px; behavior: url(css/PIE.htc); position:relative; -moz-box-shadow:2px 2px 2px #e7e7e7; -webkit-box-shadow:2px 2px 2px #e7e7e7; box-shadow:2px 2px 2px #e7e7e7;-mso-box-shadow:0px 0px 4px #e7e7e7;}
 #MainContent .AllProduct ul li .Detail{ height:1%; overflow:hidden; margin:0;}
